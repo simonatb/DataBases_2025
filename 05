@@ -1,0 +1,50 @@
+PC 
+
+--- 1 ---
+SELECT CONVERT(DECIMAL(9,2),AVG(speed)) AS AVG_SPEED
+FROM pc;
+
+--- 2 ---
+SELECT maker,AVG(screen) AS avg_screen
+FROM laptop JOIN product
+ON laptop.model = product.model
+GROUP BY maker;
+
+--- 3 ---
+SELECT CONVERT(DECIMAL(9,2),AVG(speed)) AS AVG_SPEED
+FROM laptop
+WHERE price > 1000;
+
+--- 4 ---
+SELECT maker,CONVERT(DECIMAL(9,2),AVG(price)) AS avg_price
+FROM pc JOIN product
+ON pc.model = product.model
+GROUP BY maker
+HAVING maker = 'A';
+
+--- 5 ---
+--- 6 ---
+SELECT speed,CONVERT(DECIMAL(9,2),AVG(price)) AS avg_price
+FROM pc
+GROUP BY speed;
+
+--- 7 ---
+SELECT maker,COUNT(pc.model) AS pc_count
+FROM pc JOIN product
+ON pc.model = product.model
+GROUP BY maker
+HAVING COUNT(pc.model) >= 3
+
+--- 8 ---
+SELECT product.maker,pc.price
+FROM pc JOIN product 
+ON pc.model = product.model
+WHERE pc.price = (SELECT MAX(pc.price) FROM pc)
+
+--- 9 ---
+SELECT speed,AVG(price) AS avg_speed
+FROM pc 
+GROUP BY speed
+HAVING speed > 800
+
+--- 10 ---
