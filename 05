@@ -23,6 +23,13 @@ GROUP BY maker
 HAVING maker = 'A';
 
 --- 5 ---
+SELECT CONVERT(DECIMAL(9,2),AVG(price)) AS avg_price
+FROM (SELECT l.model,l.price 
+       FROM laptop AS l
+	   UNION ALL SELECT p.model,p.price
+	   FROM pc AS p) AS t JOIN product ON product.model = t.model
+WHERE product.maker = 'B';
+
 --- 6 ---
 SELECT speed,CONVERT(DECIMAL(9,2),AVG(price)) AS avg_price
 FROM pc
