@@ -1,0 +1,34 @@
+--- 1 ---
+INSERT INTO product(model,maker,type)
+VALUES (1100,'C','pc');
+ 
+INSERT INTO pc(code,model,speed,ram,hd,cd,price)
+VALUES (12,1100,2400,2048,500,52,299);
+
+--- 2 ---
+DELETE FROM pc
+WHERE model = 1100;
+
+--- 3 ---
+DELETE FROM laptop
+--WHERE model in (SELECT laptop.model FROM laptop JOIN product 
+                ON product.model = laptop.model 
+				WHERE product.maker NOT IN (SELECT maker 
+				                            FROM product
+											WHERE type = 'laptop'));
+
+--- 4 ---
+UPDATE product
+SET maker='B'
+WHERE maker = 'A';
+
+--- 5 ---
+UPDATE pc
+SET price=price/2,hd=hd+20;
+
+--- 6 ---
+UPDATE laptop
+SET screen=screen+1
+WHERE model IN (SELECT laptop.model FROM laptop JOIN product 
+                ON product.model = laptop.model
+				WHERE maker = 'B');
